@@ -1,0 +1,39 @@
+services:
+  userservice:
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+    command: ["dotnet", "UserService/UserService.dll"]
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - backend
+  
+  postservice:
+    build:
+      context: .
+      dockerfile: PostService/Dockerfile
+    command: ["dotnet", "PostService/PostService.dll"]
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - BaseAddresses__DockerBaseAddress=http://userservice/api/user/
+    networks:
+      - backend
+  
+  apigateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5200:80"
+    depends_on:
+      - userservice
+      - postservice
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
