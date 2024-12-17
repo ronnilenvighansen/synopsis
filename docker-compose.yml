@@ -5,20 +5,28 @@ services:
       dockerfile: UserService/Dockerfile
     command: ["dotnet", "UserService/UserService.dll"]
     environment:
+      - ConnectionStrings__DockerConnection=Server=userdb;Database=userdb;User=root;Password=password
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
     networks:
       - backend
-  
+    deploy:
+      replicas: 3
+
   postservice:
     build:
       context: .
       dockerfile: PostService/Dockerfile
     command: ["dotnet", "PostService/PostService.dll"]
     environment:
+      - ConnectionStrings__DockerConnection=Server=postdb;Database=postdb;User=root;Password=password
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
       - BaseAddresses__DockerBaseAddress=http://userservice/api/user/
     networks:
       - backend
+    deploy:
+      replicas: 3
   
   apigateway:
     build:
@@ -34,6 +42,46 @@ services:
     networks:
       - backend
 
+  userdb:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: userdb
+    volumes:
+      - userdb-data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    command: >
+      --server-id=1
+      --log-bin=mysql-bin
+
+  postdb:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: postdb
+    volumes:
+      - postdb-data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    command: >
+      --server-id=1
+      --log-bin=mysql-bin
+
 networks:
   backend:
     driver: bridge
+
+volumes:
+  userdb-data:
+  postdb-data:

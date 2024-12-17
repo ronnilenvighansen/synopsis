@@ -1,0 +1,84 @@
+{
+    "GlobalConfiguration": 
+    {
+      "BaseUrl": "http://localhost:5200"
+    },
+    "Routes": 
+    [
+      {
+        "DownstreamPathTemplate": "/api/v1/user/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "userservice", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v1/users/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/v1/post/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "postservice", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v1/posts/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/v2/user/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "userservice-1", "Port": 80 },
+            { "Host": "userservice-2", "Port": 80 },
+            { "Host": "userservice-3", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v2/users/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+        "LoadBalancerOptions": 
+        {
+            "Type": "RoundRobin"
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/v2/post/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "postservice-1", "Port": 80 },
+            { "Host": "postservice-2", "Port": 80 },
+            { "Host": "postservice-3", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v2/posts/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+        "LoadBalancerOptions": 
+        {
+            "Type": "RoundRobin"
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/v2/user/aggregate/{userId}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "userservice", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v2/users/aggregate/{userId}",
+        "UpstreamHttpMethod": [ "Get" ],
+        "Aggregator": "UserPostAggregator"
+      },
+      {
+        "DownstreamPathTemplate": "/api/v2/post/aggregate/{userId}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": 
+        [
+            { "Host": "postservice", "Port": 80 }
+        ],
+        "UpstreamPathTemplate": "/v2/posts/aggregate/{userId}",
+        "UpstreamHttpMethod": [ "Get" ],
+        "Aggregator": "UserPostAggregator"
+      }
+    ]
+}
+  

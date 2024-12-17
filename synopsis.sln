@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{0663DF19-31E5-4475-9C71-8133D30BCA0D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{58FB33B7-6715-4846-AA4F-D0D78ED9E5B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostService", "PostService\PostService.csproj", "{8B40050D-C413-4EBF-83EA-CF27F5CD0D12}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0663DF19-31E5-4475-9C71-8133D30BCA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0663DF19-31E5-4475-9C71-8133D30BCA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0663DF19-31E5-4475-9C71-8133D30BCA0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0663DF19-31E5-4475-9C71-8133D30BCA0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58FB33B7-6715-4846-AA4F-D0D78ED9E5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58FB33B7-6715-4846-AA4F-D0D78ED9E5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58FB33B7-6715-4846-AA4F-D0D78ED9E5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
