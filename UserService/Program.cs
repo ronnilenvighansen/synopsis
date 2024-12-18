@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.UserService.json", optional: false, reloadOnChange: true);
+
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
 builder.Services.AddDbContext<UserDbContext>(options =>

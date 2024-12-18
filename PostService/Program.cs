@@ -4,6 +4,8 @@ using PostService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.PostService.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddScoped<IDValidationService>();
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
@@ -24,14 +26,12 @@ builder.Services.AddDbContext<PostDbContext>(options =>
     );
 });
 
-builder.Services.AddHttpClient<IDValidationService>((provider, client) =>
+builder.Services.AddHttpClient<IDValidationService>((client) =>
 {
-    var configuration = provider.GetRequiredService<IConfiguration>();
-
     var baseAddress = environment switch
     {
-        "Development" => configuration["BaseAddresses:DevelopmentBaseAddress"],
-        "Docker" => configuration["BaseAddresses:DockerBaseAddress"],
+        "Development" => builder.Configuration["BaseAddresses:DevelopmentBaseAddress"],
+        "Docker" => builder.Configuration["BaseAddresses:DockerBaseAddress"],
         _ => throw new Exception("No valid environment detected")
     };
 
@@ -41,7 +41,7 @@ builder.Services.AddHttpClient<IDValidationService>((provider, client) =>
 
 builder.Services.AddScoped<PostDbContext>();
 
-builder.Services.AddHttpClient<PostController>();
+builder.Services.AddHttpClient<PostControllerV2>();
 
 builder.Services.AddControllers();
 

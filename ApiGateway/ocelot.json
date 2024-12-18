@@ -1,39 +1,50 @@
 {
     "GlobalConfiguration": 
     {
-      "BaseUrl": "http://localhost:5200"
+        "BaseUrl": "http://localhost:5200",
+        "RequestIdKey": "X-Request-Id",
+        "HttpHandlerOptions": 
+        {
+            "AllowAutoRedirect": false,
+            "UseCookieContainer": false,
+            "UseProxy": false,
+            "SslProtocols": "Tls12"
+        }
     },
     "Routes": 
     [
       {
-        "DownstreamPathTemplate": "/api/v1/user/{everything}",
-        "DownstreamScheme": "http",
+        "DownstreamPathTemplate": "/api/v1/user/{health}",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "userservice", "Port": 80 }
+            { "Host": "userservice", "Port": 443 }
         ],
-        "UpstreamPathTemplate": "/v1/users/{everything}",
-        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+        "UpstreamPathTemplate": "/v1/users/{health}",
+        "UpstreamHttpMethod": [ "Get" ]
       },
       {
-        "DownstreamPathTemplate": "/api/v1/post/{everything}",
-        "DownstreamScheme": "http",
+        "DownstreamPathTemplate": "/api/v1/post/{health}",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "postservice", "Port": 80 }
+            { "Host": "postservice", "Port": 443 }
         ],
-        "UpstreamPathTemplate": "/v1/posts/{everything}",
-        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+        "UpstreamPathTemplate": "/v1/posts/{health}",
+        "UpstreamHttpMethod": [ "Get" ]
       },
       {
         "DownstreamPathTemplate": "/api/v2/user/{everything}",
-        "DownstreamScheme": "http",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "userservice-1", "Port": 80 },
-            { "Host": "userservice-2", "Port": 80 },
-            { "Host": "userservice-3", "Port": 80 }
+            { "Host": "userservice", "Port": 443 }
         ],
+        "AuthenticationOptions": 
+        {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": [ "all" ]
+        },
         "UpstreamPathTemplate": "/v2/users/{everything}",
         "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
         "LoadBalancerOptions": 
@@ -43,13 +54,16 @@
       },
       {
         "DownstreamPathTemplate": "/api/v2/post/{everything}",
-        "DownstreamScheme": "http",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "postservice-1", "Port": 80 },
-            { "Host": "postservice-2", "Port": 80 },
-            { "Host": "postservice-3", "Port": 80 }
+            { "Host": "postservice", "Port": 443 }
         ],
+        "AuthenticationOptions": 
+        {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": [ "all" ]
+        },
         "UpstreamPathTemplate": "/v2/posts/{everything}",
         "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
         "LoadBalancerOptions": 
@@ -58,26 +72,32 @@
         }
       },
       {
-        "DownstreamPathTemplate": "/api/v2/user/aggregate/{userId}",
-        "DownstreamScheme": "http",
+        "DownstreamPathTemplate": "/api/v2/aggregator/{userId}",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "userservice", "Port": 80 }
+          { "Host": "aggregatorservice", "Port": 443 }
         ],
-        "UpstreamPathTemplate": "/v2/users/aggregate/{userId}",
-        "UpstreamHttpMethod": [ "Get" ],
-        "Aggregator": "UserPostAggregator"
-      },
+        "AuthenticationOptions": 
+        {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": 
+          [
+            "all"
+          ]
+        },
+        "UpstreamPathTemplate": "/v2/aggregator/{userId}",
+        "UpstreamHttpMethod": [ "Get" ]
+      },  
       {
-        "DownstreamPathTemplate": "/api/v2/post/aggregate/{userId}",
-        "DownstreamScheme": "http",
+        "DownstreamPathTemplate": "/api/v2/authentication/{everything}",
+        "DownstreamScheme": "https",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "postservice", "Port": 80 }
+          { "Host": "authenticationservice", "Port": 443 }
         ],
-        "UpstreamPathTemplate": "/v2/posts/aggregate/{userId}",
-        "UpstreamHttpMethod": [ "Get" ],
-        "Aggregator": "UserPostAggregator"
+        "UpstreamPathTemplate": "/v2/authentication/{everything}",
+        "UpstreamHttpMethod": [ "Post" ]
       }
     ]
 }

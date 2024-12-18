@@ -4,15 +4,30 @@ using PostService.Services;
 
 namespace PostService.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/v1/post")]
 [ApiController]
-public class PostController : ControllerBase
+public class PostControllerV1 : ControllerBase
+{
+    public PostControllerV1()
+    {
+    }
+
+    [HttpGet("health")]
+    public IActionResult HealthCheck()
+    {
+        return Ok("Service is running (v1)");
+    }    
+}
+
+[Route("api/v2/post")]
+[ApiController]
+public class PostControllerV2 : ControllerBase
 {
     private readonly IDValidationService _idValidationService;
     private readonly PostDbContext _context;
     private readonly HttpClient _httpClient;
 
-    public PostController(IDValidationService idValidationService, PostDbContext context, IHttpClientFactory httpClientFactory)
+    public PostControllerV2(IDValidationService idValidationService, PostDbContext context, IHttpClientFactory httpClientFactory)
     {
         _idValidationService = idValidationService;
         _context = context; 
@@ -21,13 +36,28 @@ public class PostController : ControllerBase
     [HttpGet("health")]
     public IActionResult HealthCheck()
     {
-        return Ok("Service is running");
+        return Ok("Service is running (v2)");
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
     {
         return await _context.Posts.ToListAsync();
+    }
+
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetPostsByUserId(Guid userId)
+    {
+        var posts = await _context.Posts
+            .Where(p => p.UserId == userId.ToString())
+            .ToListAsync();
+
+        if (!posts.Any())
+        {
+            return NotFound(new { Message = $"No posts found for user with ID {userId}." });
+        }
+
+        return Ok(posts);
     }
 
     [HttpPost]

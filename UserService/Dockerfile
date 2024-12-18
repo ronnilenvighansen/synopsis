@@ -14,6 +14,8 @@ WORKDIR /app
 
 COPY --from=build /app/out/UserService ./UserService
 
+COPY UserService/appsettings.UserService.json /app/appsettings.UserService.json
+
 EXPOSE 80
 
 ENTRYPOINT ["dotnet", "UserService/UserService.dll"]

@@ -22,7 +22,7 @@ services:
       - ConnectionStrings__DockerConnection=Server=postdb;Database=postdb;User=root;Password=password
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - BaseAddresses__DockerBaseAddress=http://userservice/api/user/
+      - BaseAddresses__DockerBaseAddress=http://userservice/api/v2/user/
     networks:
       - backend
     deploy:
@@ -39,6 +39,26 @@ services:
     depends_on:
       - userservice
       - postservice
+      - aggregatorservice
+      - authenticationservice
+    networks:
+      - backend
+
+  aggregatorservice:
+    build:
+      context: .
+      dockerfile: AggregatorService/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - backend
+  
+  authenticationservice:
+    build:
+      context: .
+      dockerfile: AuthenticationService/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
     networks:
       - backend
 
@@ -56,9 +76,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    command: >
-      --server-id=1
-      --log-bin=mysql-bin
 
   postdb:
     image: mysql:8.0
@@ -74,9 +91,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    command: >
-      --server-id=1
-      --log-bin=mysql-bin
 
 networks:
   backend:

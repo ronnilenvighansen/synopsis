@@ -14,6 +14,8 @@ WORKDIR /app
 
 COPY --from=build /app/out/PostService ./PostService
 
+COPY PostService/appsettings.PostService.json /app/appsettings.PostService.json
+
 EXPOSE 80
 
 ENTRYPOINT ["dotnet", "PostService/PostService.dll"]

@@ -1,5 +1,3 @@
-/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/appsettings.Development.json
-/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/appsettings.json
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/UserService
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/UserService.deps.json
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/UserService.runtimeconfig.json
@@ -42,3 +40,4 @@
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/obj/Debug/net6.0/UserService.pdb
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/obj/Debug/net6.0/UserService.genruntimeconfig.cache
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/obj/Debug/net6.0/ref/UserService.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/UserService/bin/Debug/net6.0/appsettings.UserService.json
