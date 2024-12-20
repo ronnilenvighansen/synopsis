@@ -12,11 +12,9 @@ public class AggregatorController : ControllerBase
         _httpClientFactory = httpClientFactory;
     }
 
-    // Aggregated data for user and posts
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetAggregatedUserData(Guid userId)
     {
-        // Fetch user data from UserService
         var userResponse = await _httpClientFactory.CreateClient().GetAsync($"http://userservice/api/v2/user/{userId}");
         if (!userResponse.IsSuccessStatusCode)
         {
@@ -29,7 +27,6 @@ public class AggregatorController : ControllerBase
             PropertyNameCaseInsensitive = true
         });
 
-        // Fetch posts data from PostService
         var postResponse = await _httpClientFactory.CreateClient().GetAsync($"http://postservice/api/v2/post/user/{userId}");
         if (!postResponse.IsSuccessStatusCode)
         {
@@ -42,7 +39,6 @@ public class AggregatorController : ControllerBase
             PropertyNameCaseInsensitive = true
         });
 
-        // Aggregate the user data and posts data
         var aggregatedData = new
         {
             User = userData,

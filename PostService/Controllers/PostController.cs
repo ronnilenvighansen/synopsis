@@ -25,9 +25,8 @@ public class PostControllerV2 : ControllerBase
 {
     private readonly IDValidationService _idValidationService;
     private readonly PostDbContext _context;
-    private readonly HttpClient _httpClient;
 
-    public PostControllerV2(IDValidationService idValidationService, PostDbContext context, IHttpClientFactory httpClientFactory)
+    public PostControllerV2(IDValidationService idValidationService, PostDbContext context)
     {
         _idValidationService = idValidationService;
         _context = context; 

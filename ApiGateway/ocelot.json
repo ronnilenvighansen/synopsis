@@ -21,7 +21,15 @@
             { "Host": "userservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v1/users/{health}",
-        "UpstreamHttpMethod": [ "Get" ]
+        "UpstreamHttpMethod": [ "Get" ],
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
+        }
       },
       {
         "DownstreamPathTemplate": "/api/v1/post/{health}",
@@ -31,7 +39,15 @@
             { "Host": "postservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v1/posts/{health}",
-        "UpstreamHttpMethod": [ "Get" ]
+        "UpstreamHttpMethod": [ "Get" ],
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
+        }
       },
       {
         "DownstreamPathTemplate": "/api/v2/user/{everything}",
@@ -47,9 +63,18 @@
         },
         "UpstreamPathTemplate": "/v2/users/{everything}",
         "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+        
         "LoadBalancerOptions": 
         {
             "Type": "RoundRobin"
+        },
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
         }
       },
       {
@@ -69,6 +94,14 @@
         "LoadBalancerOptions": 
         {
             "Type": "RoundRobin"
+        },
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
         }
       },
       {
@@ -87,7 +120,15 @@
           ]
         },
         "UpstreamPathTemplate": "/v2/aggregator/{userId}",
-        "UpstreamHttpMethod": [ "Get" ]
+        "UpstreamHttpMethod": [ "Get" ],
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
+        }
       },  
       {
         "DownstreamPathTemplate": "/api/v2/authentication/{everything}",
@@ -97,7 +138,15 @@
           { "Host": "authenticationservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v2/authentication/{everything}",
-        "UpstreamHttpMethod": [ "Post" ]
+        "UpstreamHttpMethod": [ "Post" ],
+        "RateLimitOptions": 
+        {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1m",
+          "PeriodTimespan": 60,
+          "Limit": 100
+        }
       }
     ]
 }

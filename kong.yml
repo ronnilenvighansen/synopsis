@@ -9,11 +9,21 @@ services:
           - /api/v1/user/health
         strip_path: false
         methods: [GET]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50 
+              minute: 1000
       - name: user-route-v2
         paths:
           - /api/v2/user/
         strip_path: false
         methods: [GET, POST, PUT, DELETE]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50  
+              minute: 1000
     
   - name: postservice
     url: http://postservice:80
@@ -23,11 +33,21 @@ services:
           - /api/v1/post/health
         strip_path: false
         methods: [GET]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50  
+              minute: 1000
       - name: post-route-v2
         paths:
           - /api/v2/post/
         strip_path: false
         methods: [GET, POST, PUT, DELETE]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50 
+              minute: 1000
     
   - name: aggregatorservice
     url: http://aggregatorservice:80
@@ -37,6 +57,11 @@ services:
           - /api/v2/aggregator/{userId}
         strip_path: false
         methods: [GET]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50 
+              minute: 1000
        
   - name: authenticationservice
     url: http://authenticationservice:80
@@ -46,3 +71,8 @@ services:
           - /api/v2/authentication/
         strip_path: false
         methods: [POST]
+        plugins:
+          - name: rate-limiting
+            config:
+              second: 50  
+              minute: 1000

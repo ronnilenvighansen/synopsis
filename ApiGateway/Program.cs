@@ -48,7 +48,7 @@ builder.Services.AddHsts(options =>
 {
     options.Preload = true;
     options.IncludeSubDomains = true;
-    options.MaxAge = TimeSpan.FromDays(365); // Customize as needed
+    options.MaxAge = TimeSpan.FromDays(365); 
 });
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
@@ -56,7 +56,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     var certPath = Environment.GetEnvironmentVariable("CERT_PATH") 
                    ?? Path.Combine(Directory.GetCurrentDirectory(), "certs", "myapp.pfx");
     var certPassword = Environment.GetEnvironmentVariable("CERT_PASSWORD") 
-                        ?? "jakob"; // Replace with your default password for local development
+                        ?? "jakob"; 
 
     serverOptions.ListenAnyIP(443, listenOptions =>
     {
