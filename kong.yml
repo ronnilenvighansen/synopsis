@@ -54,7 +54,7 @@ services:
     routes:
       - name: aggregator-route-v2
         paths:
-          - /api/v2/aggregator/{userId}
+          - /api/v2/aggregator/
         strip_path: false
         methods: [GET]
         plugins:

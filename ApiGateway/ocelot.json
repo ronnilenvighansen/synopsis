@@ -131,13 +131,13 @@
         }
       },  
       {
-        "DownstreamPathTemplate": "/api/v2/authentication/{everything}",
+        "DownstreamPathTemplate": "/api/v2/authentication/{all}",
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
           { "Host": "authenticationservice", "Port": 80 }
         ],
-        "UpstreamPathTemplate": "/v2/authentication/{everything}",
+        "UpstreamPathTemplate": "/v2/authentication/{all}",
         "UpstreamHttpMethod": [ "Post" ],
         "RateLimitOptions": 
         {
