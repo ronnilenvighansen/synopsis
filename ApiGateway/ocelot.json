@@ -15,30 +15,30 @@
     [
       {
         "DownstreamPathTemplate": "/api/v1/user/{health}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "userservice", "Port": 443 }
+            { "Host": "userservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v1/users/{health}",
         "UpstreamHttpMethod": [ "Get" ]
       },
       {
         "DownstreamPathTemplate": "/api/v1/post/{health}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "postservice", "Port": 443 }
+            { "Host": "postservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v1/posts/{health}",
         "UpstreamHttpMethod": [ "Get" ]
       },
       {
         "DownstreamPathTemplate": "/api/v2/user/{everything}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "userservice", "Port": 443 }
+            { "Host": "userservice", "Port": 80 }
         ],
         "AuthenticationOptions": 
         {
@@ -54,10 +54,10 @@
       },
       {
         "DownstreamPathTemplate": "/api/v2/post/{everything}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-            { "Host": "postservice", "Port": 443 }
+            { "Host": "postservice", "Port": 80 }
         ],
         "AuthenticationOptions": 
         {
@@ -73,10 +73,10 @@
       },
       {
         "DownstreamPathTemplate": "/api/v2/aggregator/{userId}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-          { "Host": "aggregatorservice", "Port": 443 }
+          { "Host": "aggregatorservice", "Port": 80 }
         ],
         "AuthenticationOptions": 
         {
@@ -91,10 +91,10 @@
       },  
       {
         "DownstreamPathTemplate": "/api/v2/authentication/{everything}",
-        "DownstreamScheme": "https",
+        "DownstreamScheme": "http",
         "DownstreamHostAndPorts": 
         [
-          { "Host": "authenticationservice", "Port": 443 }
+          { "Host": "authenticationservice", "Port": 80 }
         ],
         "UpstreamPathTemplate": "/v2/authentication/{everything}",
         "UpstreamHttpMethod": [ "Post" ]

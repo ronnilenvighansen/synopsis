@@ -40,3 +40,11 @@
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/obj/Debug/net6.0/ApiGateway.pdb
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/obj/Debug/net6.0/ApiGateway.genruntimeconfig.cache
 /Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/obj/Debug/net6.0/ref/ApiGateway.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/Users/ronnihansen/Desktop/softwareudvikling/system_integration/opgaver/synopsis/ApiGateway/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll

@@ -33,9 +33,33 @@ services:
       context: .
       dockerfile: ApiGateway/Dockerfile
     environment:
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=https://+:443
+      - CERT_PATH=/certs/myapp.pfx
+      - CERT_PASSWORD=jakob
     ports:
-      - "5200:80"
+      - "5200:443"
+    volumes:
+      - ./ApiGateway/certs:/certs
+    depends_on:
+      - userservice
+      - postservice
+      - aggregatorservice
+      - authenticationservice
+    networks:
+      - backend
+
+  kong:
+    image: kong:latest
+    environment:
+      KONG_DATABASE: "off"
+      KONG_PROXY_LISTEN: 0.0.0.0:5201, 0.0.0.0:80
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+      KONG_DECLARATIVE_CONFIG: /kong/kong.yml
+    ports:
+      - "5201:80"
+      - "8001:8001"
+    volumes:
+      - ./kong.yml:/kong/kong.yml
     depends_on:
       - userservice
       - postservice

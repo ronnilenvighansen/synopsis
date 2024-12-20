@@ -6,6 +6,10 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
 builder.Services.AddControllers();
 
 builder.Configuration.AddJsonFile("appsettings.json", true, true);
@@ -47,13 +51,31 @@ builder.Services.AddHsts(options =>
     options.MaxAge = TimeSpan.FromDays(365); // Customize as needed
 });
 
-builder.WebHost.UseKestrel(options =>
+builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    options.ConfigureHttpsDefaults(config =>
+    var certPath = Environment.GetEnvironmentVariable("CERT_PATH") 
+                   ?? Path.Combine(Directory.GetCurrentDirectory(), "certs", "myapp.pfx");
+    var certPassword = Environment.GetEnvironmentVariable("CERT_PASSWORD") 
+                        ?? "jakob"; // Replace with your default password for local development
+
+    serverOptions.ListenAnyIP(443, listenOptions =>
     {
-        config.SslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+        if (File.Exists(certPath))
+        {
+            listenOptions.UseHttps(certPath, certPassword);
+        }
+        else
+        {
+            Console.WriteLine($"Certificate file not found at {certPath}");
+        }
+    });
+
+    serverOptions.ConfigureHttpsDefaults(co =>
+    {
+        co.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls13;
     });
 });
+
 
 var app = builder.Build();
 

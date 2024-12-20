@@ -1,0 +1,48 @@
+_format_version: "3.0"
+
+services:
+  - name: userservice
+    url: http://userservice:80
+    routes:
+      - name: user-route-v1
+        paths:
+          - /api/v1/user/health
+        strip_path: false
+        methods: [GET]
+      - name: user-route-v2
+        paths:
+          - /api/v2/user/
+        strip_path: false
+        methods: [GET, POST, PUT, DELETE]
+    
+  - name: postservice
+    url: http://postservice:80
+    routes:
+      - name: post-route-v1
+        paths:
+          - /api/v1/post/health
+        strip_path: false
+        methods: [GET]
+      - name: post-route-v2
+        paths:
+          - /api/v2/post/
+        strip_path: false
+        methods: [GET, POST, PUT, DELETE]
+    
+  - name: aggregatorservice
+    url: http://aggregatorservice:80
+    routes:
+      - name: aggregator-route-v2
+        paths:
+          - /api/v2/aggregator/{userId}
+        strip_path: false
+        methods: [GET]
+       
+  - name: authenticationservice
+    url: http://authenticationservice:80
+    routes:
+      - name: authentication-route-v2
+        paths:
+          - /api/v2/authentication/
+        strip_path: false
+        methods: [POST]
